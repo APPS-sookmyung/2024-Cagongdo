@@ -1,3 +1,4 @@
+import exp from 'constants';
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
@@ -13,16 +14,16 @@ export const Container = styled.div`
   }
 `;
 
-export const CurrentPosBtn = styled.button`
+export const SearchBox = styled.input`
   position: absolute;
   top: 10px;
   right: 10px;
   padding: 10px;
-  background-color: #483b33;
-  color: #fff;
+  width: 300px;
+  background-color: #fff;
   border: none;
   border-radius: 5px;
   font-size: 14px;
-  cursor: pointer;
   z-index: 10;
+  border: 1px solid #000;
 `;
