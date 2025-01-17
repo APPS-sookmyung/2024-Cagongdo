@@ -1,0 +1,10 @@
+export { default as light } from './light.png';
+export { default as noise } from './noise.png';
+export { default as outlet } from './outlet.png';
+export { default as price } from './price.png';
+export { default as light_brown } from './light_brown.png';
+export { default as noise_brown } from './noise_brown.png';
+export { default as outlet_brown } from './outlet_brown.png';
+export { default as price_brown } from './price_brown.png';
+export { default as close } from './close.png';
+export { default as pencil_brown } from './pencil_brown.png';

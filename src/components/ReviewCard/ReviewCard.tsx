@@ -1,8 +1,13 @@
-// ReviewCard.tsx
+import React from 'react';
 import * as S from './ReviewCardStyle';
 import { Review } from '../../types/review';
 
-const ReviewCard: React.FC<Review> = ({
+interface ReviewCardProps extends Review {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>; // 모달 열기 상태 함수
+  // setSelectedReview: React.Dispatch<React.SetStateAction<Review | null>>; // 선택된 리뷰 정보
+}
+
+const ReviewCard: React.FC<ReviewCardProps> = ({
   img,
   title,
   star,
@@ -10,9 +15,25 @@ const ReviewCard: React.FC<Review> = ({
   openClose,
   location,
   hashtag,
+  setIsModalOpen,
+  // setSelectedReview,
 }) => {
+  // 카드 클릭 시 모달 열기 및 선택된 리뷰 정보 설정
+  const handleCardClick = () => {
+    // setSelectedReview({
+    //   img,
+    //   title,
+    //   star,
+    //   content,
+    //   openClose,
+    //   location,
+    //   hashtag,
+    // });
+    setIsModalOpen(true); // 모달 열기
+  };
+
   return (
-    <S.Container>
+    <S.Container onClick={handleCardClick}>
       <S.Top>
         <S.Image src={img} alt={title} />
         <S.Text>

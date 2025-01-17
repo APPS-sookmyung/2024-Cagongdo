@@ -6,7 +6,7 @@ const OnboardingPage = () => {
   return (
     <S.Container>
       <S.Logo src={onboardingImg} />
-      <S.LoginButton to="/map">로그인</S.LoginButton>
+      <S.LoginButton to="/map">시작하기</S.LoginButton>
     </S.Container>
   );
 };

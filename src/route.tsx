@@ -4,6 +4,7 @@ import OnboardingPage from './pages/OnboardingPage/OnboardingPage';
 import CafeListPage from './pages/CafeListPage/CafeListPage';
 import MapPage from './pages/MapPage/MapPage';
 import RecommendPage from './pages/RecommendPage/RecommendPage';
+import MyPage from './pages/MyPage/MyPage';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const AppRoutes: React.FC = () => {
       <Route path="/cafe-list" element={<CafeListPage />} />
       <Route path="/map" element={<MapPage />} />
       <Route path="/recommend" element={<RecommendPage />} />
-      <Route path="/my-page" element={<RecommendPage />} />
+      <Route path="/my-page" element={<MyPage />} />
     </Routes>
   );
 };
