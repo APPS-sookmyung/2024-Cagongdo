@@ -1,52 +1,17 @@
-import React, { useEffect } from 'react';
 import * as S from './MyPageStyle';
+import Header from '../../components/Header/Header';
+import TabBar from '../../components/TabBar/TabBar';
 
-const MyPage: React.FC = () => {
-  const cards = [
-    '카드 1',
-    '카드 2',
-    '카드 3',
-    '카드 4',
-    '카드 5',
-    '카드 6',
-    '카드 7',
-  ];
-
-  const duplicatedCards = [...cards, ...cards]; // 카드 배열을 복제
-
-  useEffect(() => {
-    // 스크롤 방지
-    const preventScroll = (e: WheelEvent | TouchEvent) => {
-      e.preventDefault();
-    };
-
-    window.addEventListener('wheel', preventScroll, { passive: false });
-    window.addEventListener('touchmove', preventScroll, { passive: false });
-
-    return () => {
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
-    };
-  }, []);
-
+const RecommendPage: React.FC = () => {
   return (
-    <S.Container>
-      <S.AnimationLayout>
-        {duplicatedCards.map((card, index) => (
-          <S.FlowBox key={index}>
-            <p>{card}</p>
-          </S.FlowBox>
-        ))}
-      </S.AnimationLayout>
-      <S.AnimationLayoutReverse>
-        {duplicatedCards.map((card, index) => (
-          <S.FlowBox key={index}>
-            <p>{card}</p>
-          </S.FlowBox>
-        ))}
-      </S.AnimationLayoutReverse>
-    </S.Container>
+    <>
+      <Header />
+      <S.Container>
+        <p>준비 중입니다.</p>
+      </S.Container>
+      <TabBar />
+    </>
   );
 };
 
-export default MyPage;
+export default RecommendPage;

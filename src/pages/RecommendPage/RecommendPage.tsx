@@ -7,7 +7,7 @@ const RecommendPage: React.FC = () => {
     <>
       <Header />
       <S.Container>
-        <p>Recommend Page</p>
+        <p>준비 중입니다.</p>
       </S.Container>
       <TabBar />
     </>
