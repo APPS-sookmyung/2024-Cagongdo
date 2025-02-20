@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
-import * as s from './MapBoxStyle';
+import { useEffect, useRef, useState } from 'react';
 import ReviewModal from '../ReviewModal/ReviewModal';
+import * as s from './MapBoxStyle';
 
 declare global {
   interface Window {
@@ -126,28 +126,102 @@ const MapBox = () => {
     });
   };
 
+  // 카페 검색
+  const searchCafes = () => {
+    if (mapInstance) {
+      const places = new kakao.maps.services.Places();
+      const center = mapInstance.getCenter(); // 현재 지도 중심 좌표
+      const lat = center.getLat(); // 위도
+      const lng = center.getLng(); // 경도
+
+      places.categorySearch(
+        'CE7', // 카테고리: CE7 - 카페
+        (data, status) => {
+          if (status === window.kakao.maps.services.Status.OK) {
+            blueMarkersRef.current.forEach(({ marker, label }) => {
+              marker.setMap(null);
+              label.setMap(null);
+            });
+            blueMarkersRef.current = [];
+
+            data.forEach((place) => {
+              const markerPosition = new kakao.maps.LatLng(
+                Number(place.y),
+                Number(place.x)
+              );
+
+              const marker = new kakao.maps.Marker({
+                position: markerPosition,
+                title: place.place_name,
+              });
+
+              marker.setMap(mapInstance);
+
+              const label = new kakao.maps.CustomOverlay({
+                position: markerPosition,
+                content: `<div style="background-color: white; padding: 5px; border-radius: 3px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); font-size: 14px;">${place.place_name}</div>`,
+                xAnchor: 0.5,
+                yAnchor: 1.5,
+              });
+
+              label.setMap(mapInstance);
+
+              blueMarkersRef.current.push({ marker, label });
+
+              kakao.maps.event.addListener(marker, 'click', () => {
+                setSelectedPlace(place);
+                setIsModalOpen(true);
+              });
+
+              kakao.maps.event.addListener(label, 'click', () => {
+                setSelectedPlace(place);
+                setIsModalOpen(true);
+              });
+            });
+          } else {
+            console.error('카페 검색 실패:', status);
+          }
+        },
+        {
+          location: new kakao.maps.LatLng(lat, lng),
+          radius: 5000, // 검색 반경 5km
+        }
+      );
+    }
+  };
+
   const handleSearch = () => {
     if (!mapInstance) return;
 
     const places = new kakao.maps.services.Places();
-    const markerData: any[] = [];
 
-    // 검색어가 빈 문자열일 때 파란 마커들을 제거
+    // 모든 마커 제거
+    markersRef.current.forEach(({ marker, label }) => {
+      marker.setMap(null);
+      label.setMap(null);
+    });
+    markersRef.current = [];
+
+    blueMarkersRef.current.forEach(({ marker, label }) => {
+      marker.setMap(null);
+      label.setMap(null);
+    });
+    blueMarkersRef.current = [];
+
+    storageMarkersRef.current.forEach(({ marker, label }) => {
+      marker.setMap(null);
+      label.setMap(null);
+    });
+    storageMarkersRef.current = [];
+
+    // 검색어가 빈 문자열일 때 빨간 마커 추가하고, 카페 카테고리로 검색
     if (searchKeyword.trim() === '') {
-      // 파란 마커들 제거
-      blueMarkersRef.current.forEach(({ marker, label }) => {
-        marker.setMap(null);
-        label.setMap(null);
-      });
-      blueMarkersRef.current = [];
-
-      // 빨간 마커 추가
-      addStorageMarkers();
+      addStorageMarkers(); // 빨간 마커 추가
+      searchCafes(); // 카페 검색
     } else {
-      // 검색어가 있을 때 장소 검색
       places.keywordSearch(searchKeyword, (data, status) => {
         if (status === window.kakao.maps.services.Status.OK) {
-          // 기존에 생성된 빨간 마커들 제거
+          // 기존 마커 제거
           markersRef.current.forEach(({ marker, label }) => {
             marker.setMap(null);
             label.setMap(null);
@@ -170,7 +244,7 @@ const MapBox = () => {
 
             const label = new kakao.maps.CustomOverlay({
               position: markerPosition,
-              content: `<div style="background-color: white; padding: 5px; border-radius: 3px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); font-size: 14px; cursor: pointer;">${place.place_name}</div>`,
+              content: `<div style="background-color: white; padding: 5px; border-radius: 3px; box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); font-size: 14px;">${place.place_name}</div>`,
               xAnchor: 0.5,
               yAnchor: 1.5,
             });

@@ -20,7 +20,7 @@ const review: ReviewDetail = {
   title: '청파맨션',
   location: '서울 용산구 청파로47나길 20',
   star: 4.5,
-  openClose: '08:30 ~ 19:00',
+  openClose: "",
   price: '4,000원',
   outlet: '많음',
   light: '적당히 밝음',
@@ -114,7 +114,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               </S.InfoLeft>
               <S.InfoRight>
                 <p>☕️ {review.star}</p>
-                <p>{review.openClose || '정보 없음'}</p>
+                <p>{review.openClose || '(정보 없음)'}</p>
                 <p>{selectedPlace.phone || '정보 없음'}</p>
                 <p>
                   <a
