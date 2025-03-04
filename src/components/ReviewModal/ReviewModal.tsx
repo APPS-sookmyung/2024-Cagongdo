@@ -129,7 +129,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
             </S.InfoContainer>
             <S.Line />
             <S.ReviewContentContainer>
-              <S.ReviewWrite>리뷰 작성</S.ReviewWrite>
+              <S.ReviewWrite>카공 정보 작성</S.ReviewWrite>
               <S.ReviewContent>
                 <S.ReviewLeft>
                   <S.ReviewText>{review.content || ''}</S.ReviewText>

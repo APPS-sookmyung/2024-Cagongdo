@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import ReviewModal from '../ReviewModal/ReviewModal';
+import ReviewWriteModal from '../ReviewWriteModal/ReviewWriteModal';
 import * as s from './MapBoxStyle';
 
 declare global {
@@ -28,7 +29,10 @@ const MapBox = () => {
   const [StorageMarkerData, setStorageMarkerData] = useState<any[]>([]); // Storage의 위치 데이터를 저장
   const [searchKeyword, setSearchKeyword] = useState<string>(''); // 검색어 상태
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false); // 모달 열림 여부 상태
+  const [isWriteModalOpen, setIsWriteModalOpen] = useState<boolean>(false); // 모달 열림 여부 상태
+
   const [selectedPlace, setSelectedPlace] = useState<any>(null); // 선택된 장소 정보
+
 
   // 카카오 맵 초기화
   useEffect(() => {
@@ -313,6 +317,12 @@ const MapBox = () => {
       {isModalOpen && selectedPlace && (
         <ReviewModal
           setIsModalOpen={setIsModalOpen}
+          selectedPlace={selectedPlace}
+        />
+      )}
+      {isModalOpen && selectedPlace && (
+        <ReviewWriteModal
+          setIsModalOpen={setIsWriteModalOpen}
           selectedPlace={selectedPlace}
         />
       )}

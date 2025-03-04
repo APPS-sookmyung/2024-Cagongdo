@@ -12,7 +12,7 @@ export const Overlay = styled.div`
 export const Container = styled.div`
   width: 100vw;
   max-width: 400px;
-  height: calc(100vh - 134px);
+  height: calc(100vh - 54px);
   overflow-y: auto;
   background: #fff;
   display: flex;

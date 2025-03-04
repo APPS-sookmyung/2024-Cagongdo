@@ -1,9 +1,8 @@
-import * as S from './CafeListPageStyle';
+import { useState } from 'react';
 import Header from '../../components/Header/Header';
 import ReviewList from '../../components/ReviewList/ReviewList';
 import TabBar from '../../components/TabBar/TabBar';
-import ReviewModal from '../../components/ReviewModal/ReviewModal';
-import { useState } from 'react';
+import * as S from './CafeListPageStyle';
 
 const CafeListPage: React.FC = () => {
   // 모달 상태와 선택된 리뷰 정보를 상태로 관리
