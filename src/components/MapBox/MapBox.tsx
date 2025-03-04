@@ -318,9 +318,10 @@ const MapBox = () => {
         <ReviewModal
           setIsModalOpen={setIsModalOpen}
           selectedPlace={selectedPlace}
+          setIsWriteModalOpen={setIsWriteModalOpen}
         />
       )}
-      {isModalOpen && selectedPlace && (
+      {isWriteModalOpen && selectedPlace && (
         <ReviewWriteModal
           setIsModalOpen={setIsWriteModalOpen}
           selectedPlace={selectedPlace}
