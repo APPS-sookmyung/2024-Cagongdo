@@ -25,6 +25,14 @@ const ReviewWriteModal: React.FC<ReviewWriteModalProps> = ({
 
   const handleSubmit = () => {
     const reviewData = {
+      id: selectedPlace.id,
+      x: selectedPlace.x,
+      y: selectedPlace.y,
+      placeName: selectedPlace.place_name,
+      roadAddressName: selectedPlace.road_address_name,
+      addressName: selectedPlace.address_name,
+      phone: selectedPlace.phone,
+      placeUrl: selectedPlace.place_url,
       rating,
       hours,
       price,
@@ -34,6 +42,9 @@ const ReviewWriteModal: React.FC<ReviewWriteModalProps> = ({
       reviewContent,
       hashtags: hashtags.split(',').map((tag) => tag.trim()),
     };
+
+    // 로컬 스토리지에 리뷰 저장
+    localStorage.setItem('reviewData', JSON.stringify(reviewData));
 
     console.log('reviewData: ', reviewData);
     closeModal();

@@ -1,4 +1,3 @@
-import exp from 'constants';
 import { styled } from 'styled-components';
 
 export const Container = styled.div`
@@ -11,6 +10,37 @@ export const Container = styled.div`
   #map {
     width: 100%;
     height: 100%;
+  }
+`;
+
+export const MapContainer = styled.div`
+  width: 100%;
+  height: 100%;
+`;
+
+export const SearchNear = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 320px;
+
+  height: 43px;
+
+  padding: 0 15px;
+
+  border: 0;
+  border-radius: 20px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+
+  z-index: 10;
+
+  background-color: #493a33;
+  cursor: pointer;
+
+  :hover {
+    scale: 1.1;
   }
 `;
 

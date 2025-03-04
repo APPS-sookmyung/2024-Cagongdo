@@ -33,7 +33,6 @@ const MapBox = () => {
 
   const [selectedPlace, setSelectedPlace] = useState<any>(null); // 선택된 장소 정보
 
-
   // 카카오 맵 초기화
   useEffect(() => {
     if (mapContainerRef.current && window.kakao && window.kakao.maps) {
@@ -301,18 +300,15 @@ const MapBox = () => {
   return (
     <>
       <s.Container>
-        <div
-          id="map"
-          ref={mapContainerRef}
-          style={{ width: '100%', height: '100%' }}
-        >
+        <s.MapContainer id="map" ref={mapContainerRef}>
+          <s.SearchNear onClick={searchCafes}>근처 카페 검색</s.SearchNear>
           <s.SearchBox
             placeholder="장소를 검색해보세요"
             value={searchKeyword}
             onChange={(e) => setSearchKeyword(e.target.value)}
             onKeyDown={handleSearchKeyPress}
           />
-        </div>
+        </s.MapContainer>
       </s.Container>
       {isModalOpen && selectedPlace && (
         <ReviewModal

@@ -6,6 +6,7 @@ import {
   outlet_brown,
   price_brown,
 } from '../../assets/icons';
+import sample2Img from '../../assets/imgs/sample2Img.png';
 import { review } from '../../data/reviewDetail';
 import * as S from './ReviewModalStyle';
 
@@ -35,10 +36,16 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
           <S.ImagesContainer>
             <S.ImageShadow />
             <S.MainImageContainer>
-              <S.MainImage src={review.img} alt={selectedPlace.place_name} />
+              <S.MainImage
+                src={review.img || sample2Img}
+                alt={selectedPlace.place_name}
+              />
             </S.MainImageContainer>
             <S.AdditionalImagesContainer>
-              <S.AdditionalImage src={review.img} alt={review.title} />
+              <S.AdditionalImage
+                src={review.img || sample2Img}
+                alt={review.title}
+              />
               <S.CloseBtnContainer>
                 <S.CloseBtn
                   onClick={closeModal}
@@ -46,26 +53,38 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
                   alt="닫기"
                 ></S.CloseBtn>
 
-                <S.AdditionalImage src={review.img} alt={review.title} />
+                <S.AdditionalImage
+                  src={review.img || sample2Img}
+                  alt={review.title}
+                />
               </S.CloseBtnContainer>
-              <S.AdditionalImage src={review.img} alt={review.title} />
-              <S.AdditionalImage src={review.img} alt={review.title} />
+              <S.AdditionalImage
+                src={review.img || sample2Img}
+                alt={review.title}
+              />
+              <S.AdditionalImage
+                src={review.img || sample2Img}
+                alt={review.title}
+              />
             </S.AdditionalImagesContainer>
           </S.ImagesContainer>
           <S.Body>
             <S.Title>{selectedPlace.place_name}</S.Title>
             <S.Location>
-              <p>
+              <span>
                 📍{' '}
                 {selectedPlace.road_address_name || selectedPlace.address_name}
-              </p>
+              </span>
             </S.Location>
+
             <S.DetailOptionList>
               <S.DetailOption>
                 <S.DetailOptionIcon src={price_brown} alt="price" />
                 <S.DetailOptionDescription>가격</S.DetailOptionDescription>
                 <S.DetailOptionValue>
-                  {`${review.price}부터~` || '정보 없음'}
+                  {Number(review.price) > 0
+                    ? `${review.price}부터~`
+                    : '정보 없음'}
                 </S.DetailOptionValue>
               </S.DetailOption>
               <S.DetailOption>
@@ -91,6 +110,7 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               </S.DetailOption>
             </S.DetailOptionList>
             <S.Line />
+
             <S.InfoContainer>
               <S.InfoLeft>
                 <p>카공 만족도</p>
@@ -99,8 +119,10 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
                 <p>카카오 지도 링크</p>
               </S.InfoLeft>
               <S.InfoRight>
-                <p>☕️ {review.star}</p>
-                <p>{review.openClose || '(정보 없음)'}</p>
+                <p>
+                  {Number(review.star) > 0 ? `☕️ {review.star}` : '정보 없음'}
+                </p>
+                <p>{review.openClose || '정보 없음'}</p>
                 <p>{selectedPlace.phone || '정보 없음'}</p>
                 <p>
                   <a
@@ -118,17 +140,22 @@ const ReviewModal: React.FC<ReviewModalProps> = ({
               <S.ReviewWrite onClick={() => setIsWriteModalOpen(true)}>
                 카공 정보 작성
               </S.ReviewWrite>
-              <S.ReviewContent>
-                <S.ReviewLeft>
-                  <S.ReviewText>{review.content || ''}</S.ReviewText>
-                  <S.ReviewHashtagContainer>
-                    {review.hashtag.map((hashtag, idx) => (
-                      <S.ReviewHashtag key={idx}>#{hashtag}</S.ReviewHashtag>
-                    ))}
-                  </S.ReviewHashtagContainer>
-                </S.ReviewLeft>
-                <S.ReviewImage src={review.img} alt={review.title} />
-              </S.ReviewContent>
+              {review.content && (
+                <S.ReviewContent>
+                  <S.ReviewLeft>
+                    <S.ReviewText>{review.content || ''}</S.ReviewText>
+                    <S.ReviewHashtagContainer>
+                      {review.hashtag.map((hashtag, idx) => (
+                        <S.ReviewHashtag key={idx}>#{hashtag}</S.ReviewHashtag>
+                      ))}
+                    </S.ReviewHashtagContainer>
+                  </S.ReviewLeft>
+                  <S.ReviewImage
+                    src={review.img || sample2Img}
+                    alt={review.title}
+                  />
+                </S.ReviewContent>
+              )}
             </S.ReviewContentContainer>
           </S.Body>
         </S.Content>
