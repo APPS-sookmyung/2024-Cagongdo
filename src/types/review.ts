@@ -9,6 +9,7 @@ export interface Review {
 }
 
 export interface ReviewDetail {
+  id: string;
   img: string;
   title: string;
   location: string;
